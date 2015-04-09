@@ -1,7 +1,7 @@
 var mongoose = require( 'mongoose' );
 
 //Uncomment if you are going to use a local instance or add connection details for your account on MongoLab
-var dbURI = 'mongodb://localhost:27017/quotes';
+var dbURI = 'mongodb://localhost/quotes';
 
 mongoose.connect(dbURI);
 
