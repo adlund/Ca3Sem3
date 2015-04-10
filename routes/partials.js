@@ -1,28 +1,45 @@
+/**
+ * Created by Kasper on 09-04-2015.
+ */
 var express = require('express');
 var fs = require('fs');
-var Facade = require("../model/Facade");
+
+//var jokes = require("../model/jokes");
+
 var router = express.Router();
 
 var path = __dirname.substr(0,__dirname.lastIndexOf("\\"));  //Remove the routes part
 
 router.get('/home', function(req, res) {
-   res.render('home',{quote: {"quote" : "A clear conscience is usually the sign of a bad memory", "author"  :  "Unknown", category: "general"}})
-  });
+    res.render('home',{quote: {"quote" : "A clear conscience is usually the sign of a bad memory", "author"  :  "Unknown", category: "general"}});
+});
 
 router.get('/pageA', function(req, res) {
-   res.render('jadeA',{info: {"text" : "Message to page A"}});
-  });
+    res.render('jadeA',{info: {"text" : "Message to page A"}});
+});
 
 router.get('/signUp', function(req, res) {
-   res.render('signUp');
-  });
+    res.render('signUp');
+});
 
 router.get('/pageB', function(req, res) {
-   res.render('jadeB');
-  });
+    res.render('jadeB');
+});
 
-router.get('/login', function(req, res) {
-   res.render('login');
-  });
+router.get('/login', function(req, res, next) {
+    res.render('login', {loginerror : req.session.loginerror});
+});
+
+router.get('/documentation', function(req, res, next) {
+    res.render('documentation');
+});
+
+router.get('/viewquotes', function(req, res, next) {
+    res.render('viewquotes');
+});
+
+router.get('/addquote', function(req, res, next) {
+    res.render('addquote');
+});
 
 module.exports = router;

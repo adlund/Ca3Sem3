@@ -1,11 +1,5 @@
 var db = require('../model/db.js');
 
-var topics = [
-    "Best",
-    "Cool",
-    "Funny"
-]
-
 function _getAllUsers(){
     db.User.find(function (err, users){
         if(err) {
@@ -26,6 +20,8 @@ function _getUser(id){
 }
 
 function _createUser(UserJson){
+    JSON.stringify(UserJson);
+    console.log(UserJson.firstName);
 var User = new db.User({firstName: UserJson.firstName, lastName: UserJson.lastName, userName: UserJson.userName, email: UserJson.email, phone: UserJson.phone, password: UserJson.password});
     User.save(function(err){
        if(err) {
@@ -43,7 +39,7 @@ function _getAllQuotesByTopic(Topic){
         console.log(err);
     }
     else{
-        return JSON.parse(Quotes);
+        return Quotes;
     }
 }
 
@@ -59,8 +55,8 @@ function _getRandomQuote(Topic){
     }
 }
 
-function _createQuote(QuoteJson){
-    var Quote = new db.Quote({topic: QuoteJson.topic, author: QuoteJson.author, reference: QuoteJson.reference, quote: QuoteJson.quote});
+function _createQuote(topic, author, reference, quote){
+    var Quote = new db.Quote({topic: topic, author: author, reference: reference, quote: quote});
     Quote.save(function(err){
         if(err) {
             return console.log(err);
@@ -75,12 +71,11 @@ function _deleteQuote(id){
     db.Quote.findByIdAndRemove(id, callback);
 }
 
-function _editQuote(id, QuoteJson){
-    db.Quote.findByIdAndUpdate(id,{topic: JSON.topic, author: JSON.author, reference: JSON.reference, quote: quote});
+function _editQuote(id, topic, author, reference, quote){
+    db.Quote.findByIdAndUpdate(id,{topic: topic, author: author, reference: reference, quote: quote}, callback);
 }
 
 module.exports = {
-    getTopics : topics,
     getAllUsers : _getAllUsers,
     getUser : _getUser,
     createUser : _createUser,
