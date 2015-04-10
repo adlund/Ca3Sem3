@@ -1,20 +1,24 @@
 var assert = require("assert");
 var db = require('../model/db.js');
+var Facade = require("../model/Facade");
+var mongoose = require( 'mongoose' );
+
 
 describe('User', function(){
-    describe('#save()', function(){
+    describe('#createUser()', function(){
         it('should save without error', function(done){
-            var user = new db.User({firstName: 'Alex', lastName: 'Lund', userName: 'adlund', email: 'adlund@hotmail.com', phone: 22585912, password: 'ja'});
-            user.save(done);
+            Facade.createUser({"firstName":"hej","lastName":"hejsa","userName":"hejsasa","email":"hahah@haha.com","phone":2345,"password":"hey!"});
+          done();
         })
     })
 });
 
 describe('Quote', function(){
-    describe('#save()', function(){
+    describe('#createQuote()', function(){
         it('should save without error', function(done){
-            var user = new db.Quote({topic: 'funny', author: 'Alexander', reference: 'Alexander', quote: 'Bedste Quote!'});
-            user.save(done);
+            Facade.createQuote({"topic":"funny","author:":"MIG!",reference:"Alex",quote:"bedst!"});
+            done();
         })
     })
 });
+

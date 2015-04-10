@@ -1,12 +1,21 @@
 var mongoose = require( 'mongoose' );
 
 //Uncomment if you are going to use a local instance or add connection details for your account on MongoLab
-var dbURI = 'mongodb://localhost/quotes';
+var dbURI = 'mongodb://ca3:ca3@ds061631.mongolab.com:61631/ca3sem3';
 
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
   console.log('Mongoose connected to ' + dbURI);
+    mongoose.connection.db.dropDatabase(function(err, result) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log('db Dropped');
+        }
+    });
+
 });
 
 mongoose.connection.on('error',function (err) {
@@ -24,14 +33,17 @@ process.on('SIGINT', function() {
   });
 });
 
+
+
 var UserSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    userName: String,
+    userName: {type: String, unique: true},
     email: String,
     number: Number,
     password: String
 });
+
 
 var QuoteSchema = new mongoose.Schema({
     topic: String,
