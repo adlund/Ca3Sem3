@@ -30,4 +30,16 @@ router.get('/login', function(req, res, next) {
     res.render('login', {loginerror : req.session.loginerror});
 });
 
+router.get('/documentation', function(req, res, next) {
+    res.render('documentation');
+});
+
+router.get('/viewquotes', function(req, res, next) {
+    res.render('viewquotes');
+});
+
+router.get('/addquote', function(req, res, next) {
+    res.render('addquote');
+});
+
 module.exports = router;
