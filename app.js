@@ -11,7 +11,6 @@ var partials = require('./routes/partials');
 
 
 var facade = require("./model/Facade");
-var userFacade = require("./model/userFacade");
 
 var app = express();
 
