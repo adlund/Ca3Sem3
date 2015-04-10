@@ -1,4 +1,21 @@
 var db = require('../model/db.js');
+var mongoose = require("mongoose");
+
+var User = mongoose.model("User");
+
+function _checkUser(user,password,callback){
+    db.User.findOne({userName : user },function(err,foundUser){
+        if(err) {
+            return callback(err);
+        }
+        if(foundUser != null && foundUser.password === password){
+            callback(null,true);
+        } else
+        {
+            callback(null,false);
+        }
+    })
+}
 
 function _getAllUsers(){
     db.User.find(function (err, users){
@@ -20,8 +37,6 @@ function _getUser(id){
 }
 
 function _createUser(UserJson){
-    JSON.stringify(UserJson);
-    console.log(UserJson.firstName);
 var User = new db.User({firstName: UserJson.firstName, lastName: UserJson.lastName, userName: UserJson.userName, email: UserJson.email, phone: UserJson.phone, password: UserJson.password});
     User.save(function(err){
        if(err) {
@@ -76,6 +91,7 @@ function _editQuote(id, topic, author, reference, quote){
 }
 
 module.exports = {
+    checkUser : _checkUser,
     getAllUsers : _getAllUsers,
     getUser : _getUser,
     createUser : _createUser,
