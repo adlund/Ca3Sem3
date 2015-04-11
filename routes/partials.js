@@ -8,8 +8,6 @@ var path = __dirname.substr(0,__dirname.lastIndexOf("\\"));  //Remove the routes
 
 router.get('/home', function(req, res) {
     res.render('home',{quote: {"quote" : "A clear conscience is usually the sign of a bad memory", "author"  :  "Unknown", category: "general"}});
-    //console.log(Facade.getUser("5527b5ac3519900c7dae4e6a"));
-    console.log(Facade.getRandomQuote("Funny"));
 });
 
 router.get('/pageA', function(req, res) {
