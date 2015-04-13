@@ -47,6 +47,10 @@ router.get('/addquote', function(req, res, next) {
     res.render('addquote');
 });
 
+router.get('/rest', function(req, res, next) {
+    res.render('rest');
+});
+
 var d = '';
 // GET Request options configuration
 var optionsget = {
