@@ -39,6 +39,20 @@ function _getAllUsers(callback){
     });
 }
 
+function _checkUser(user,password,callback){
+    db.User.findOne({userName : user },function(err,foundUser){
+        if(err) {
+            return callback(err);
+        }
+        if(foundUser != null && foundUser.password === password){
+            callback(null,true);
+        } else
+        {
+            callback(null,false);
+        }
+    })
+}
+
 function _getUser(id, callback){
    db.User.findById(id, function(err, user){
        if(err) {
@@ -120,6 +134,7 @@ function _editQuote(id, QuoteJson) {
 }
 
 module.exports = {
+    checkUser : _checkUser,
     getAllTopics : topics,
     dbSetup : _dbSetup,
     getAllUsers : _getAllUsers,

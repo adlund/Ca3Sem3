@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var session = require("express-session");
 
 var routes = require('./routes/index');
-var partials = require('./routes/partials');
+var api = require('./routes/api');
 
 
 var facade = require("./model/Facade");
@@ -31,9 +31,8 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.use('/', routes);
-app.use('/partials', partials)
+app.use('/api', api)
 
 app.use(function(req, res, next){
     var newFName = req.body.createFirstName;
@@ -61,7 +60,7 @@ app.use(function (req, res, next) {
 
         if (typeof(userName) !== "undefined" && typeof(password !== "undefined"))
         {
-            userFacade.checkUser(userName, password, function (err, result) {
+            facade.checkUser(userName, password, function (err, result) {
                 if (err || result === false) {
                     req.session.loginerror = "Wrong password or user name";
                 }
